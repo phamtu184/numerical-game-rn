@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { GlobalContext } from "../context/global";
+import React from "react";
+import { View, Text } from "react-native";
 
 export default (props) => {
-  const { level, score, time, createNewListNumber } = useContext(GlobalContext);
+  const { level, score, time } = props;
   return (
-    <TouchableOpacity onPress={() => createNewListNumber(1)}>
-      <View>
-        <Text>Level: {level}</Text>
-        <Text>Score: {score}</Text>
-        <Text>Time: {time}</Text>
-      </View>
-    </TouchableOpacity>
+    <View>
+      <Text>Level: {level}</Text>
+      <Text>Score: {score}</Text>
+      <Text>Time: {time}</Text>
+    </View>
   );
 };

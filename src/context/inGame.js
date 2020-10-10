@@ -1,8 +1,8 @@
 import React, { createContext } from "react";
 import useNumbers from "../hooks/useNumbers";
-export const GlobalContext = createContext();
+export const InGameContext = createContext();
 
-export function GlobalProvider(props) {
+export function InGameProvider(props) {
   const {
     numbers,
     level,
@@ -12,10 +12,10 @@ export function GlobalProvider(props) {
     selectNum,
   } = useNumbers();
   return (
-    <GlobalContext.Provider
+    <InGameContext.Provider
       value={{ numbers, level, score, time, createNewListNumber, selectNum }}
     >
       {props.children}
-    </GlobalContext.Provider>
+    </InGameContext.Provider>
   );
 }

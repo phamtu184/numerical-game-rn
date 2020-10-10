@@ -1,25 +1,17 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { GlobalProvider } from "./src/context/global.js";
-import ListNumItem from "./src/components/listNumItem";
-import TopTitle from "./src/components/topTitle";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Home from "./src/screens/start";
+import InGame from "./src/screens/inGame";
 
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <GlobalProvider>
-      <View style={styles.container}>
-        <TopTitle />
-        <ListNumItem />
-      </View>
-    </GlobalProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Play" component={InGame} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    flex: 1,
-    marginTop: 40,
-    marginHorizontal: 40,
-  },
-});

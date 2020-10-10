@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FlatList } from "react-native";
 import Num from "./numItem";
-import { GlobalContext } from "../context/global";
 
 export default (props) => {
-  const { numbers, selectNum } = useContext(GlobalContext);
+  const { numbers, selectNum } = props;
   const renderItem = ({ item }) => {
     return (
       <Num content={item.content} status={item.status} selectNum={selectNum} />

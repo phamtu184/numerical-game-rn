@@ -7,6 +7,7 @@ import {
   sortListNum,
 } from "./func";
 import { timePlay, currentLevel, bonusTime } from "./constance";
+
 export default (initialValue) => {
   const [numbers, setNumbers] = useState([]);
   const [level, setLevel] = useState(currentLevel);
@@ -54,7 +55,10 @@ export default (initialValue) => {
     setOrder(0);
   };
   const selectNum = (e) => {
-    if (Number(e) == resultList[resultList.length - 1]) {
+    if (
+      Number(e) == resultList[resultList.length - 1] &&
+      Number(e) == resultList[order]
+    ) {
       setScore((prevState) => prevState + 5 * level);
       setTime((prevState) => prevState + bonusTime);
       setLevel((prevState) => {
