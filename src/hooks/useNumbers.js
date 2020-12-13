@@ -7,6 +7,7 @@ import {
   sortListNum,
 } from "./func";
 import { timePlay, currentLevel, bonusTime } from "./constance";
+import sound from './playerSound'
 
 export default (initialValue) => {
   const [numbers, setNumbers] = useState([]);
@@ -15,6 +16,7 @@ export default (initialValue) => {
   const [time, setTime] = useState(timePlay);
   const [resultList, setResultList] = useState([]);
   const [order, setOrder] = useState(0);
+  const {playFailSound, playScoreSound} = sound();
   useEffect(() => {
     createNewListNumber(level);
   }, []);
@@ -59,6 +61,7 @@ export default (initialValue) => {
       Number(e) == resultList[resultList.length - 1] &&
       Number(e) == resultList[order]
     ) {
+      playScoreSound();
       setScore((prevState) => prevState + 5 * level);
       setTime((prevState) => prevState + bonusTime);
       setLevel((prevState) => {
@@ -74,6 +77,7 @@ export default (initialValue) => {
     } else {
       const handleWrongNumber = new Promise((res, rej) => {
         setNumbers(wrongNumbers(numbers));
+        playFailSound()
         res();
       });
       handleWrongNumber.then(() =>
