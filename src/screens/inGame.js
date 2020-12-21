@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import { InGameProvider } from "../context/inGame.js";
+import { InGameContext } from "../context/inGame";
 import ListNumItem from "../components/listNumItem";
 import TopTitle from "../components/topTitle";
-import { InGameContext } from "../context/inGame";
+// import ModalScore from '../components/modalScoreSave'
 
 export default () => {
   return (
@@ -13,11 +14,19 @@ export default () => {
   );
 };
 const InGameComp = () => {
-  const { level, score, time, numbers, selectNum } = useContext(InGameContext);
+  const { level, score, time, numbers, selectNum, returnGame } = useContext(InGameContext);
   return (
     <View style={styles.container}>
       <TopTitle level={level} score={score} time={time} />
       <ListNumItem numbers={numbers} selectNum={selectNum} />
+      {/* <ModalScore isOpenModal={isOpenModal} saveScore={saveScore} score={score}/> */}
+      <View style={styles.btn}>
+        <Button
+          title="Làm mới"
+          color="#1E90FF"
+          onPress={returnGame}
+        />
+      </View>
     </View>
   );
 };

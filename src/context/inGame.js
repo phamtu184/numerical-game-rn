@@ -10,10 +10,12 @@ export function InGameProvider(props) {
     time,
     createNewListNumber,
     selectNum,
+    saveScore,
+    returnGame
   } = useNumbers();
   return (
     <InGameContext.Provider
-      value={{ numbers, level, score, time, createNewListNumber, selectNum }}
+      value={{ numbers, level, score, time, createNewListNumber, selectNum,returnGame, saveScore }}
     >
       {props.children}
     </InGameContext.Provider>

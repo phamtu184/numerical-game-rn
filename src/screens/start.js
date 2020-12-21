@@ -1,30 +1,35 @@
 import React from "react";
-import { View, Button, StyleSheet, BackHandler } from "react-native";
+import { View, ImageBackground , Button, StyleSheet, BackHandler } from "react-native";
+import Img from '../../assets/background.jpg'
 
 export default ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.btn}>
-        <Button
-          onPress={() => navigation.navigate("Màn hình chơi")}
-          title="Bắt đầu"
-          color="#333"
-        />
+    <ImageBackground source={Img} style={styles.image}>
+      <View style={styles.container}>
+        
+          <View style={styles.btn}>
+            <Button
+              onPress={() => navigation.navigate("Màn hình chơi")}
+              title="Bắt đầu"
+              color="#333"
+            />
+          </View>
+          <View style={styles.btn}>
+            <Button
+              title="Xem điểm"
+              color="#333"
+              onPress={() => navigation.navigate("Xem điểm")}
+            />
+          </View>
+          <View style={styles.btn}>
+            <Button
+              title="Thoát"
+              color="#333"
+              onPress={()=>BackHandler.exitApp()}
+            />
+          </View>
       </View>
-      <View style={styles.btn}>
-        <Button
-          title="Coi điểm"
-          color="#333"
-        />
-      </View>
-      <View style={styles.btn}>
-        <Button
-          title="Thoát"
-          color="#333"
-          onPress={()=>BackHandler.exitApp()}
-        />
-      </View>
-    </View>
+    </ImageBackground>
   );
 };
 const styles = StyleSheet.create({
@@ -36,5 +41,10 @@ const styles = StyleSheet.create({
   btn:{
     width:150,
     marginVertical:10
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
 });

@@ -8,31 +8,33 @@ import {
 } from "./func";
 import { timePlay, currentLevel, bonusTime } from "./constance";
 import sound from './playerSound'
+import { useNavigation } from '@react-navigation/native';
 
 export default (initialValue) => {
   const [numbers, setNumbers] = useState([]);
   const [level, setLevel] = useState(currentLevel);
-  const [score, setScore] = useState(0);
   const [time, setTime] = useState(timePlay);
+  const [score, setScore] = useState(0);
   const [resultList, setResultList] = useState([]);
   const [order, setOrder] = useState(0);
   const {playFailSound, playScoreSound} = sound();
+  const navigation = useNavigation();
   useEffect(() => {
     createNewListNumber(level);
   }, []);
+  
   useEffect(() => {
-    const timeInterval = setInterval(() => {
-      setTime((prevState) => {
-        if (prevState == 0) {
-          returnGame();
-          return timePlay;
-        } else {
-          return prevState - 1;
-        }
-      });
-    }, 1000);
-    return () => clearInterval(timeInterval);
-  }, []);
+    const timer = time > 0 && setInterval(() => setTime(time - 1), 1000);
+    if (time === 0) {
+      setTime(0);
+      if(score>0){
+        navigation.navigate("Game Over",{score})
+      } else{
+        returnGame()
+      }
+    }
+    return () => clearInterval(timer);
+  }, [time]);
   const createNewListNumber = (lv) => {
     let arrNumber = [];
     for (let i = 0; i < 10; i++) {
@@ -89,11 +91,12 @@ export default (initialValue) => {
   const returnGame = () => {
     setLevel(currentLevel);
     setScore(0);
-    setTime(timePlay);
     setOrder(0);
+    setTime(timePlay)
     setResultList([]);
     createNewListNumber(currentLevel);
   };
+  
   return {
     numbers,
     level,
@@ -101,5 +104,6 @@ export default (initialValue) => {
     time,
     createNewListNumber,
     selectNum,
+    returnGame
   };
 };

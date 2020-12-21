@@ -1,6 +1,5 @@
 import {useEffect,useState} from 'react'
 import { Audio } from 'expo-av';
-import fail from '../../assets/score.wav'
 
 export default function Sound() {
   const [sound, setSound] = useState();
